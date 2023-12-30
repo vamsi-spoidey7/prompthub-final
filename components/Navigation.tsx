@@ -33,7 +33,7 @@ const Navigation = ({ activeItem }: Props) => {
             {navItems.map((item, id) => (
                 <Link key={id} href={item.href}>
                     <h5
-                        className={`sm:px-2 md:px-4 xl:px-8 sm:py-0 py-5 sm:text-[16px] md:text-lg lg:text-xl font-[500] font-Inter ${
+                        className={`md:px-4 xl:px-8 md:py-0 py-5 md:text-lg lg:text-xl font-[500] font-Inter ${
                             activeItem === id && "text-[#6dff4b]"
                         }`}
                     >

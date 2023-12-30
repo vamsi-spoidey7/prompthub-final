@@ -6,6 +6,7 @@ import Navigation from "./Navigation";
 import { AiOutlineSearch } from "react-icons/ai";
 import { CgProfile } from "react-icons/cg";
 import { FaBars } from "react-icons/fa";
+import { FaRegCircleXmark } from "react-icons/fa6";
 import PromptHub from "./PromptHub";
 
 type Props = {
@@ -34,12 +35,12 @@ const Header = ({ activeItem }: Props) => {
 
     return (
         <div
-            className={`w-full sm:px-2 p-4 min-h-[60px] border-b border-b-[#ffffff32] transition-opacity ${
+            className={`w-full md:px-2 p-4 min-h-[60px] border-b border-b-[#ffffff32] transition-opacity ${
                 active && "fixed top-0 left-0 bg-[#000] z-[9999]"
             }`}
         >
             {/* For tablet screen */}
-            <div className="hidden md:w-[90%] mx-auto sm:flex items-center justify-between">
+            <div className="hidden max-w-screen-xl px-4 mx-auto md:flex items-center justify-between">
                 <div>
                     <PromptHub />
                 </div>
@@ -47,7 +48,7 @@ const Header = ({ activeItem }: Props) => {
                     <Navigation activeItem={activeItem} />
                 </div>
                 <div className="flex items-center">
-                    <AiOutlineSearch className="text-[25px] sm:mr-3 md:mr-5 cursor-pointer" />
+                    <AiOutlineSearch className="text-[25px] md:mr-3 lg:mr-5 cursor-pointer" />
                     <Link href={"/signin"}>
                         <CgProfile className="text-[25px] cursor-pointer" />
                     </Link>
@@ -55,7 +56,7 @@ const Header = ({ activeItem }: Props) => {
             </div>
 
             {/* For mobile screen */}
-            <div className="w-full sm:hidden flex items-center justify-between">
+            <div className="w-full md:hidden flex items-center justify-between">
                 <div className="text-2xl">
                     <PromptHub />
                 </div>
@@ -67,13 +68,17 @@ const Header = ({ activeItem }: Props) => {
                 </div>
                 {open && (
                     <div
-                        className="fixed sm:hidden w-full h-screen top-0 left-0 z-[9999] backdrop-blur-sm"
+                        className="fixed md:hidden w-full h-screen top-0 left-0 z-[9999] backdrop-blur-sm"
                         onClick={handleClose}
                         id="screen"
                     >
-                        <div className="fixed bg-black h-screen top-0 right-0 w-[60%] z-[9999] border">
-                            <div className="text-3xl text-center my-5">
+                        <div className="fixed bg-black h-screen top-0 right-0 w-[60%] z-[9999]">
+                            <div className="flex items-center justify-between px-4 text-3xl text-center my-5">
                                 <PromptHub />
+                                <FaRegCircleXmark
+                                    className="cursor-pointer"
+                                    onClick={() => setOpen(!open)}
+                                />
                             </div>
                             <hr className="h-px my-4 bg-gray-200 border-0 dark:bg-gray-700" />
                             <div className="px-5">
