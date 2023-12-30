@@ -29,7 +29,7 @@ const navItems = [
 
 const Navigation = ({ activeItem }: Props) => {
     return (
-        <div className="flex mx-3">
+        <>
             {navItems.map((item, id) => (
                 <Link key={id} href={item.href}>
                     <h5
@@ -41,7 +41,7 @@ const Navigation = ({ activeItem }: Props) => {
                     </h5>
                 </Link>
             ))}
-        </div>
+        </>
     );
 };
 export default Navigation;
