@@ -32,33 +32,6 @@ body {
         min-height: unset !important;
     }
 }
-.banner::before {
-    position: absolute;
-    top: 0px;
-    left: -150px;
-    content: "";
-    width: 500px;
-    height: 500px;
-    min-height: 300px;
-    border-radius: 50%;
-    background: rgba(75, 255, 223, 0.24);
-    filter: blur(227px);
-    /* z-index: -1; */
-}
-.banner::after {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    right: -100px;
-    content: "";
-    width: 430px;
-    height: 430px;
-    min-height: 300px;
-    border-radius: 50%;
-    background: rgba(75, 169, 255, 0.44);
-    filter: blur(272px);
-    /* z-index: -1; */
-}
 .shop-banner {
     background-image: url("https://pixner.net/aikeu/assets/images/banner/cmn-bg.png");
     background-position: center center;
