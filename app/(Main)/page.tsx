@@ -5,6 +5,7 @@ import PromptCard from "@/components/Prompts/PromptCard";
 import Image from "next/image";
 import { styles } from "@/utils/styles";
 import BestSellers from "@/components/Shop/BestSellers";
+import Future from "@/components/Route/Future";
 
 type Props = {};
 const Page = (props: Props) => {
@@ -40,6 +41,7 @@ const Page = (props: Props) => {
                     </div>
                     <br />
                     <BestSellers />
+                    <Future />
                 </div>
             </div>
         </div>
