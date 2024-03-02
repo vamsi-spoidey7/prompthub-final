@@ -7,6 +7,8 @@ import { styles } from "@/utils/styles";
 import BestSellers from "@/components/Shop/BestSellers";
 import Future from "@/components/Route/Future";
 import Partners from "@/components/Route/Partners";
+import SellersBanner from "@/components/Shop/SellersBanner";
+import { Divider } from "@nextui-org/react";
 
 type Props = {};
 const Page = (props: Props) => {
@@ -44,6 +46,10 @@ const Page = (props: Props) => {
                     <BestSellers />
                     <Future />
                     <Partners />
+                    <SellersBanner />
+                    <br />
+                    <br />
+                    <Divider className="bg-[#ffffff23]" />
                 </div>
             </div>
         </div>
