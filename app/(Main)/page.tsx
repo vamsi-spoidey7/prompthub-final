@@ -1,4 +1,4 @@
-import Header from "@/components/Header";
+import Header from "@/components/Layout/Header";
 import Hero from "@/components/Route/Hero";
 import About from "@/components/Route/About";
 import PromptCard from "@/components/Prompts/PromptCard";
@@ -9,6 +9,7 @@ import Future from "@/components/Route/Future";
 import Partners from "@/components/Route/Partners";
 import SellersBanner from "@/components/Shop/SellersBanner";
 import { Divider } from "@nextui-org/react";
+import Footer from "@/components/Layout/Footer";
 
 type Props = {};
 const Page = (props: Props) => {
@@ -50,6 +51,7 @@ const Page = (props: Props) => {
                     <br />
                     <br />
                     <Divider className="bg-[#ffffff23]" />
+                    <Footer />
                 </div>
             </div>
         </div>
