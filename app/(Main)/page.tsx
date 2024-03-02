@@ -6,6 +6,7 @@ import Image from "next/image";
 import { styles } from "@/utils/styles";
 import BestSellers from "@/components/Shop/BestSellers";
 import Future from "@/components/Route/Future";
+import Partners from "@/components/Route/Partners";
 
 type Props = {};
 const Page = (props: Props) => {
@@ -42,6 +43,7 @@ const Page = (props: Props) => {
                     <br />
                     <BestSellers />
                     <Future />
+                    <Partners />
                 </div>
             </div>
         </div>
