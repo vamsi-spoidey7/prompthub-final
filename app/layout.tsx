@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { Inter, Montserrat } from "next/font/google";
 import "./globals.css";
 import NextUiProvider from "./(Providers)/NextUiProvider";
+import { Toaster } from "react-hot-toast";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
@@ -25,7 +26,10 @@ export default function RootLayout({
         <ClerkProvider>
             <html lang="en">
                 <body className={`${inter.variable} ${montserrat.variable}`}>
-                    <NextUiProvider>{children}</NextUiProvider>
+                    <NextUiProvider>
+                        <Toaster position="top-center" reverseOrder={false} />
+                        {children}
+                    </NextUiProvider>
                 </body>
             </html>
         </ClerkProvider>
