@@ -1,7 +1,7 @@
 "use client";
 import { styles } from "@/utils/styles";
 import { useUser } from "@clerk/nextjs";
-import { Button, Input, Textarea } from "@nextui-org/react";
+import { Button, Input, Spinner, Textarea } from "@nextui-org/react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -81,7 +81,7 @@ const Page = (props: Props) => {
                                     name: e.target.value,
                                 })
                             }
-                            label="Becodemy"
+                            placeholder="Becodemy"
                             size="sm"
                             variant="bordered"
                         />
@@ -93,7 +93,7 @@ const Page = (props: Props) => {
                         <Input
                             isRequired
                             type="text"
-                            label="lorem ipsum"
+                            placeholder="lorem ipsum"
                             size="sm"
                             value={shopData.description}
                             onChange={(e) =>
@@ -130,7 +130,11 @@ const Page = (props: Props) => {
                             disabled={loading}
                             disableAnimation={loading}
                         >
-                            Create Shop
+                            {loading ? (
+                                <Spinner color="success" />
+                            ) : (
+                                "Create Shop"
+                            )}
                         </Button>
                     </div>
                 </form>
