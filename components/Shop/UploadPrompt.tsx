@@ -407,7 +407,7 @@ const UploadPrompt = (props: Props) => {
                         disabled={isLoading}
                         disableAnimation={isLoading}
                     >
-                        {true ? (
+                        {isLoading ? (
                             <Spinner color="success" />
                         ) : (
                             "Upload your prompt"
