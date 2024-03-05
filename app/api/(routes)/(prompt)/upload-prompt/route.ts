@@ -7,6 +7,7 @@ export async function POST(req: NextRequest) {
     try {
         const data = await req.json();
         const user: User | null = await currentUser();
+        console.log("came to api");
 
         if (!data.images) {
             data.images = [];
