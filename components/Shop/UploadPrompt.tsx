@@ -6,6 +6,7 @@ import {
     Select,
     SelectItem,
     Selection,
+    Spinner,
     Textarea,
 } from "@nextui-org/react";
 import { IoDocumentAttachOutline } from "react-icons/io5";
@@ -406,7 +407,11 @@ const UploadPrompt = (props: Props) => {
                         disabled={isLoading}
                         disableAnimation={isLoading}
                     >
-                        Upload your prompt
+                        {isLoading ? (
+                            <Spinner color="primary" />
+                        ) : (
+                            "Upload your prompt"
+                        )}
                     </Button>
                 </div>
                 <br />
