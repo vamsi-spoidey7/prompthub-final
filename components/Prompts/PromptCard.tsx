@@ -72,7 +72,7 @@ const PromptCard = ({ prompt }: Props) => {
                 <Ratings rating={prompt?.rating} />
             </div>
             <br />
-            <Link href={"/prompt/${prompt.id}"} className="w-full">
+            <Link href={`/prompt/${prompt.id}`} className="w-full">
                 <div
                     className={`${styles.button} !py-2 !px-3 text-center mb-3 w-full text-white bg-transparent border border-[#16c252] hover:bg-[#16c252] hover:text-black duration-300 transition-opacity font-Inter font-[600]`}
                 >
