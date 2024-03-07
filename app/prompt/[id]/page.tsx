@@ -1,20 +1,15 @@
 import { getUser } from "@/actions/user/getUser";
-import Header from "@/components/Layout/Header";
-import ShopBanner from "@/components/Shop/ShopBanner";
+import PromptDetailsPage from "./_page";
 
 type Props = {};
 const page = async (props: Props) => {
     const data = await getUser();
     return (
         <div>
-            <div className="shop-banner">
-                <Header
-                    activeItem={2}
-                    user={data?.user}
-                    isSellerExist={data?.shop ? true : false}
-                />
-                <ShopBanner />
-            </div>
+            <PromptDetailsPage
+                user={data?.user}
+                isSellerExist={data?.shop ? true : false}
+            />
         </div>
     );
 };
