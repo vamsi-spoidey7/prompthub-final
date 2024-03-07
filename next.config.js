@@ -7,6 +7,7 @@ const nextConfig = {
                 hostname: "pixner.net**",
             },
         ],
+        domains: ["res.cloudinary.com"],
     },
 };
 
