@@ -2,7 +2,8 @@ import { styles } from "@/utils/styles";
 import PromptDetailsCard from "./PromptDetailsCard";
 import SellersBanner from "@/components/Shop/SellersBanner";
 import { prompt } from "@/@types/promptTypes";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import PromptInformation from "./PromptInformation";
 
 type Props = {};
 
@@ -34,7 +35,7 @@ const PromptDetails = ({ promptData }: { promptData: prompt | undefined }) => {
             <PromptDetailsCard promptData={promptData} />
             <br />
             <br />
-            {/* Prompt Information */}
+            <PromptInformation promptData={promptData} />
             <br />
             <h1 className={`${styles.heading} px-2 pb-2`}>Related Prompts</h1>
             <div className="flex flex-wrap">{/* Prompt Card  */}</div>
