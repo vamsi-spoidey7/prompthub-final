@@ -2,6 +2,7 @@
 import { styles } from "@/utils/styles";
 import { Avatar, Divider, Tab, Tabs } from "@nextui-org/react";
 import React from "react";
+import ReviewCard from "./ReviewCard";
 
 type Props = {
     promptData: any;
@@ -73,6 +74,27 @@ const PromptInformation = ({ promptData }: Props) => {
                                             </div>
                                         </div>
                                     </>
+                                )}
+                                {item.title === "Reviews" && (
+                                    <div className="">
+                                        {promptData &&
+                                            promptData.reviews.map(
+                                                (item: any, index: number) => (
+                                                    <ReviewCard
+                                                        item={item}
+                                                        key={index}
+                                                    />
+                                                )
+                                            )}
+
+                                        {promptData?.reviews?.length === 0 && (
+                                            <h5
+                                                className={`${styles.paragraph} text-center py-5`}
+                                            >
+                                                No Reviews have to show!
+                                            </h5>
+                                        )}
+                                    </div>
                                 )}
                             </div>
                         </Tab>
