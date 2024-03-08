@@ -16,7 +16,7 @@ const ShopBanner = ({ title }: { title: string }) => {
                     className="absolute top-1 left-10"
                 />
             </div>
-            <h4 className={`${styles.heading} font-Monserrat xl:text-6xl`}>
+            <h4 className={`${styles.heading} font-Monserrat xl:text-5xl z-50`}>
                 {title}
             </h4>
             <div>
