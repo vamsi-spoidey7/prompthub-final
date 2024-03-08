@@ -9,7 +9,15 @@ import PromptCardLoader from "@/utils/PromptCardLoader";
 
 type Props = {};
 
-const PromptDetails = ({ promptData }: { promptData: prompt | undefined }) => {
+const PromptDetails = ({
+    promptData,
+    stripePromise,
+    clientSecret,
+}: {
+    promptData: prompt | undefined;
+    stripePromise: any;
+    clientSecret: string;
+}) => {
     const [prompts, setPrompts] = useState<prompt[]>();
     const [loading, setLoading] = useState(true);
     useEffect(() => {
@@ -36,7 +44,11 @@ const PromptDetails = ({ promptData }: { promptData: prompt | undefined }) => {
 
     return (
         <div>
-            <PromptDetailsCard promptData={promptData} />
+            <PromptDetailsCard
+                promptData={promptData}
+                clientSecret={clientSecret}
+                stripePromise={stripePromise}
+            />
             <br />
             <br />
             <PromptInformation promptData={promptData} />

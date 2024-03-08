@@ -7,7 +7,15 @@ import React, { useEffect, useState } from "react";
 import Marquee from "react-fast-marquee";
 import { IoCloseOutline } from "react-icons/io5";
 
-const PromptDetailsCard = ({ promptData }: { promptData: any }) => {
+const PromptDetailsCard = ({
+    promptData,
+    clientSecret,
+    stripePromise,
+}: {
+    promptData: any;
+    clientSecret: string;
+    stripePromise: any;
+}) => {
     const [activeImage, setactiveImage] = useState(promptData?.images[0]?.url);
     const [open, setOpen] = useState(false);
     const tags = promptData?.tags;
