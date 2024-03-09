@@ -6,6 +6,8 @@ import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import Marquee from "react-fast-marquee";
 import { IoCloseOutline } from "react-icons/io5";
+import { Elements } from "@stripe/react-stripe-js";
+import CheckoutForm from "./CheckoutForm";
 
 const PromptDetailsCard = ({
     promptData,
@@ -130,13 +132,27 @@ const PromptDetailsCard = ({
             </div>
             {open && (
                 <div className="w-full h-screen bg-[#00000036] fixed top-0 left-0 z-50 flex items-center justify-center">
-                    <div className="w-[500px] min-h-[500px] bg-white rounded-xl shadow p-3">
+                    <div className="w-[500px] min-h-[500px] bg-white rounded-xl shadow p-3 overflow-auto">
                         <div className="w-full flex justify-end">
                             <IoCloseOutline
                                 size={40}
                                 className="text-black cursor-pointer"
                                 onClick={() => setOpen(!open)}
                             />
+                        </div>
+                        <div className="w-full">
+                            {stripePromise && clientSecret && (
+                                <Elements
+                                    stripe={stripePromise}
+                                    options={{ clientSecret }}
+                                >
+                                    <CheckoutForm
+                                        setOpen={setOpen}
+                                        open={open}
+                                        promptData={promptData}
+                                    />
+                                </Elements>
+                            )}
                         </div>
                     </div>
                 </div>

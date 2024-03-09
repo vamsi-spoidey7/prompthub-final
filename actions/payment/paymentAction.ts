@@ -13,6 +13,17 @@ export const stripePaymentIntent = async ({ amount }: { amount: Number }) => {
         const paymentIntent = await stripe.paymentIntents.create({
             amount,
             currency: "USD",
+            description: "Buying the prompt",
+            shipping: {
+                name: "Random singh",
+                address: {
+                    line1: "510 Townsend St",
+                    postal_code: "98140",
+                    city: "San Francisco",
+                    state: "CA",
+                    country: "US",
+                },
+            },
             metadata: {
                 company: "PromptHub",
             },
@@ -20,8 +31,10 @@ export const stripePaymentIntent = async ({ amount }: { amount: Number }) => {
                 enabled: true,
             },
         });
-
-        return paymentIntent;
+        const serializedPayment = paymentIntent
+            ? JSON.parse(JSON.stringify(paymentIntent))
+            : null;
+        return serializedPayment;
     } catch (error) {
         console.log(error);
     }

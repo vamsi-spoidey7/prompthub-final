@@ -16,6 +16,7 @@
     "@mui/x-data-grid": "^6.19.6",
     "@nextui-org/react": "^2.2.9",
     "@prisma/client": "^5.10.2",
+    "@stripe/react-stripe-js": "^2.5.1",
     "@stripe/stripe-js": "^3.0.7",
     "axios": "^1.6.7",
     "cloudinary": "^2.0.2",
