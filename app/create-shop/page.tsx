@@ -81,7 +81,7 @@ const Page = (props: Props) => {
                                     name: e.target.value,
                                 })
                             }
-                            placeholder="Becodemy"
+                            placeholder="MCU Store"
                             size="sm"
                             variant="bordered"
                         />
@@ -93,7 +93,7 @@ const Page = (props: Props) => {
                         <Input
                             isRequired
                             type="text"
-                            placeholder="lorem ipsum"
+                            placeholder="We sell prompts related to MCU"
                             size="sm"
                             value={shopData.description}
                             onChange={(e) =>
