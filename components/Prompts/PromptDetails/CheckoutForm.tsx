@@ -36,12 +36,15 @@ const CheckoutForm = ({
         if (error) {
             setMessage(error.message);
         } else if (paymentIntent && paymentIntent.status === "succeeded") {
+            setMessage("Processing....");
             await newOrder({
                 userId: userData?.user?.id!,
                 promptId: promptData.id,
+                sellerId: promptData.sellerId,
                 payment_id: paymentIntent.id,
                 payment_method: paymentIntent.id!,
             }).then((res) => {
+                setMessage("Hurray Payment Success");
                 setOpen(!open);
                 window.location.reload();
             });

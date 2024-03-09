@@ -30,7 +30,7 @@ const SellerCard = ({ item, loading }: Props) => {
                         <Ratings rating={item?.ratings} />
                     </div>
                     <span className={`${styles.label} py-2`}>
-                        Total Sales: {item?.allProducts}
+                        Total Sales: {item?.totalSales}
                     </span>
                 </>
             )}

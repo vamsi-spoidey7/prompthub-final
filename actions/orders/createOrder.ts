@@ -5,11 +5,13 @@ import prisma from "@/lib/prismaDb";
 export const newOrder = async ({
     userId,
     promptId,
+    sellerId,
     payment_method,
     payment_id,
 }: {
     userId: string;
     promptId: string;
+    sellerId: string;
     payment_id: string;
     payment_method: string;
 }) => {
@@ -27,7 +29,7 @@ export const newOrder = async ({
 
         await prisma.shops.update({
             where: {
-                userId,
+                userId: sellerId,
             },
             data: {
                 totalSales: { increment: 1 },
