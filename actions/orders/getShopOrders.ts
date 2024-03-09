@@ -1,0 +1,34 @@
+import prisma from "@/lib/prismaDb";
+import { clerkClient } from "@clerk/nextjs";
+
+export const getShopOrders = async ({ sellerId }: { sellerId: string }) => {
+    try {
+        const orders: any = await prisma.orders.findMany({
+            where: {
+                prompt: {
+                    sellerId,
+                },
+            },
+            include: {
+                prompt: true,
+            },
+            orderBy: {
+                createdAt: "desc",
+            },
+        });
+
+        for (const order of orders) {
+            const userId = order?.userId;
+            if (userId) {
+                const user = await clerkClient.users.getUser(userId);
+                order.user = user;
+            }
+        }
+        const serializedOrders = orders
+            ? JSON.parse(JSON.stringify(orders))
+            : null;
+        return serializedOrders;
+    } catch (error) {
+        console.log(error);
+    }
+};
