@@ -1,10 +1,10 @@
-import { propmt } from "./promptTypes";
+import { prompt } from "./promptTypes";
 
 export type Orders = {
     id: string;
     userId: string;
     promptId: string;
-    prompt: propmt;
+    prompt: prompt;
     payment_method: string;
     payment_id: string;
     createdAt: Date;
