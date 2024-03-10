@@ -1,6 +1,8 @@
 import UserAllOrders from "./_page";
 import { getUser } from "@/actions/user/getUser";
 
+export const dynamic = "force-dynamic";
+
 const Page = async () => {
     const userData = await getUser();
     return (
