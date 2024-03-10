@@ -3,6 +3,8 @@ import ShopAllOrders from "@/components/Shop/ShopAllOrders";
 import { getUser } from "@/actions/user/getUser";
 import { getShopOrders } from "@/actions/orders/getShopOrders";
 
+export const dynamic = "force-dynamic";
+
 const Page = async () => {
     const sellerId: any = await getUser();
     const ordersData = await getShopOrders({ sellerId: sellerId?.user.id });

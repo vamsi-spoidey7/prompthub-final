@@ -4,6 +4,8 @@ import { getUser } from "@/actions/user/getUser";
 import { getShopOrders } from "@/actions/orders/getShopOrders";
 import { getAllPromptsByShop } from "@/actions/shop/getAllPromptsByShop";
 
+export const dynamic = "force-dynamic";
+
 type Props = {};
 
 const Page = async (props: Props) => {

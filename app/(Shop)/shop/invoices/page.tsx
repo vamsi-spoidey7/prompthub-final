@@ -3,6 +3,8 @@ import AllInvoices from "./_page";
 import { sellerInvoices } from "@/actions/withdraws/sellerInvoices";
 import { getSellerInfo } from "@/actions/shop/getSellerInfo";
 
+export const dynamic = "force-dynamic";
+
 const Page = async () => {
     const data: any = await getSellerInfo();
     const invoices = await sellerInvoices({

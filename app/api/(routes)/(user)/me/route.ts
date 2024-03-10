@@ -2,6 +2,8 @@ import prisma from "@/lib/prismaDb";
 import { User, currentUser } from "@clerk/nextjs/server";
 import { NextRequest, NextResponse } from "next/server";
 
+export const dynamic = "force-dynamic";
+
 export async function GET(req: NextRequest) {
     try {
         const user: User | null = await currentUser();

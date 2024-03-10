@@ -3,6 +3,8 @@ import React from "react";
 import AllPrompts from "@/components/Prompts/AllPrompts";
 import { getAllPromptsByShop } from "@/actions/shop/getAllPromptsByShop";
 
+export const dynamic = "force-dynamic";
+
 type Props = {};
 
 const Page = async (props: Props) => {
