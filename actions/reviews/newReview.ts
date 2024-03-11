@@ -32,12 +32,9 @@ export const newReview = async ({
                 reviews: true,
             },
         });
+
         if (prompt) {
             const reviews: any = prompt.reviews;
-
-            reviews.push({
-                rating,
-            });
 
             let avg = 0;
 
@@ -61,21 +58,32 @@ export const newReview = async ({
             where: {
                 userId: prompt?.sellerId,
             },
+            include: {
+                prompts: true,
+            },
         });
 
         if (shop) {
-            const shopRatings = shop.ratings + rating;
+            const prompts: any = shop.prompts;
+
+            let totalRating = 0;
+            let promptWithRatingCount = 0;
+            prompts &&
+                prompts.forEach((promp: any) => {
+                    totalRating += promp.rating;
+                    if (promp.rating !== 0) promptWithRatingCount++;
+                });
 
             await prisma.shops.update({
                 where: {
                     userId: prompt?.sellerId,
                 },
                 data: {
-                    ratings: shop.ratings === 0 ? shopRatings : shopRatings / 2,
+                    ratings: totalRating / promptWithRatingCount,
                 },
             });
         }
-        
+
         return review;
     } catch (error) {
         console.log(error);

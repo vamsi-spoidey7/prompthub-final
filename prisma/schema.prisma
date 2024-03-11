@@ -21,6 +21,7 @@ model Shops {
   userId           String      @unique
   bank             Banks?
   withdraws        withdraws[]
+  prompts          Prompts[]
 }
 
 model Images {
@@ -84,6 +85,7 @@ model Prompts {
   status           promptStatus  @default(Pending)
   createdAt        DateTime      @default(now())
   updatedAt        DateTime      @updatedAt
+  shops            Shops         @relation(fields: [sellerId], references: [userId])
 }
 
 model Banks {
