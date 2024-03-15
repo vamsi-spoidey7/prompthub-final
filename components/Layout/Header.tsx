@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { useState } from "react";
 import Navigation from "./Navigation";
-import { AiOutlineSearch } from "react-icons/ai";
 import { CgProfile } from "react-icons/cg";
 import { FaBars } from "react-icons/fa";
 import { FaRegCircleXmark } from "react-icons/fa6";
@@ -12,6 +11,7 @@ import { UserProfile } from "@clerk/nextjs";
 import { User } from "@clerk/nextjs/server";
 import { RxCross1 } from "react-icons/rx";
 import DropDown from "./DropDown";
+import SearchBar from "@/utils/SearchBar";
 
 type Props = {
     activeItem: number;
@@ -59,7 +59,8 @@ const Header = ({ activeItem, user, isSellerExist }: Props) => {
                     <Navigation activeItem={activeItem} />
                 </div>
                 <div className="flex items-center">
-                    <AiOutlineSearch className="text-[25px] md:mr-3 lg:mr-5 cursor-pointer" />
+                    {/* <AiOutlineSearch className="text-[25px] md:mr-3 lg:mr-5 cursor-pointer" /> */}
+                    <SearchBar />
                     {user ? (
                         <div>
                             <DropDown
