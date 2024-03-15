@@ -12,21 +12,11 @@ export const stripePaymentIntent = async ({ amount }: { amount: Number }) => {
     try {
         const paymentIntent = await stripe.paymentIntents.create({
             amount,
-            currency: "USD",
-            description: "Buying the prompt",
-            shipping: {
-                name: "Random singh",
-                address: {
-                    line1: "510 Townsend St",
-                    postal_code: "98140",
-                    city: "San Francisco",
-                    state: "CA",
-                    country: "US",
-                },
-            },
-            metadata: {
-                company: "PromptHub",
-            },
+            currency: "INR",
+            // description: "Buying the prompt",
+            // metadata: {
+            //     company: "PromptHub",
+            // },
             automatic_payment_methods: {
                 enabled: true,
             },

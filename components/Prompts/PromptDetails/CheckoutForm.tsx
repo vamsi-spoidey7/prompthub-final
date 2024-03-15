@@ -9,6 +9,9 @@ import {
     AddressElement,
 } from "@stripe/react-stripe-js";
 import React, { useState } from "react";
+import { Spinner } from "@nextui-org/react";
+import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
 
 const CheckoutForm = ({
     setOpen,
@@ -19,12 +22,15 @@ const CheckoutForm = ({
     open: boolean;
     promptData: any;
 }) => {
-    const [message, setMessage] = useState<any>("");
+    const [loading, setLoading] = useState(false);
     const stripe = useStripe();
     const elements = useElements();
 
+    const router = useRouter();
+
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+        setLoading(true);
         const userData = await getUser();
         if (!stripe || !elements) {
             return;
@@ -34,9 +40,11 @@ const CheckoutForm = ({
             redirect: "if_required",
         });
         if (error) {
-            setMessage(error.message);
+            const errorMessage =
+                error.message || "An error occurred during payment.";
+            toast.error(errorMessage);
+            setLoading(false);
         } else if (paymentIntent && paymentIntent.status === "succeeded") {
-            setMessage("Processing....");
             await newOrder({
                 userId: userData?.user?.id!,
                 promptId: promptData.id,
@@ -44,10 +52,13 @@ const CheckoutForm = ({
                 payment_id: paymentIntent.id,
                 payment_method: paymentIntent.id!,
             }).then((res) => {
-                setMessage("Hurray Payment Success");
+                toast.success("Order Placed Successfully!");
                 setOpen(!open);
-                window.location.reload();
+                setTimeout(() => {
+                    router.push("/my-orders");
+                }, 1000);
             });
+            setLoading(false);
         }
     };
 
@@ -60,17 +71,14 @@ const CheckoutForm = ({
                 id="submit"
                 className={`${styles.button} !bg-[crimson] mt-4 !p-2 !w-full`}
             >
-                <span>Pay Now ${promptData?.price}</span>
+                <span>
+                    {loading ? (
+                        <Spinner label="Processing..." color="warning" />
+                    ) : (
+                        `Pay Now $${promptData?.price}`
+                    )}
+                </span>
             </button>
-            {/* Show amy error or success message */}
-            {message && (
-                <div
-                    id="payment-message"
-                    className="text-[red] font-Poppins pt-2"
-                >
-                    {message}
-                </div>
-            )}
         </form>
     );
 };
