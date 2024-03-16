@@ -7,6 +7,7 @@ import { format } from "timeago.js";
 import { PiDownloadDuotone } from "react-icons/pi";
 import { VscPreview } from "react-icons/vsc";
 import { RxCross1 } from "react-icons/rx";
+import { FaRegCheckCircle } from "react-icons/fa";
 
 import { useEffect, useState } from "react";
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
@@ -17,6 +18,7 @@ import toast from "react-hot-toast";
 import Header from "@/components/Layout/Header";
 import { Orders } from "@/@types/OrderTypes";
 import Loader from "@/utils/Loader";
+import { Spinner } from "@nextui-org/react";
 
 const UserAllOrders = ({
     user,
@@ -31,7 +33,8 @@ const UserAllOrders = ({
     const [orders, setorders] = useState<Orders[]>();
     const [review, setReview] = useState("");
     const [rating, setRating] = useState(0);
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
+    const [buttonLoading, setButtonLoading] = useState(false);
 
     const fetchOrdersData = async () => {
         setLoading(true);
@@ -82,15 +85,30 @@ const UserAllOrders = ({
             headerName: "Give one Review",
             flex: 0.5,
             renderCell: (params: any) => {
+                const reviewed = orders
+                    ?.find((i: any) => i.promptId === params.row.prompt.id)
+                    ?.prompt.reviews.some(
+                        (review: any) => review.userId === user?.id
+                    );
+                console.log(reviewed);
                 return (
                     <div className="w-[70%] flex justify-center">
-                        <VscPreview
-                            className="text-2xl text-white cursor-pointer"
-                            onClick={() => {
-                                setOpen(!open);
-                                setPromptId(params.row.prompt.id);
-                            }}
-                        />
+                        {reviewed ? (
+                            // Render a reviewed indicator icon if already reviewed
+                            <FaRegCheckCircle
+                                className="text-green-500 text-2xl cursor-not-allowed"
+                                title="Reviewed"
+                            />
+                        ) : (
+                            // Render the button to give a review if not reviewed
+                            <VscPreview
+                                className="text-2xl text-white cursor-pointer"
+                                onClick={() => {
+                                    setOpen(!open);
+                                    setPromptId(params.row.prompt.id);
+                                }}
+                            />
+                        )}
                     </div>
                 );
             },
@@ -118,6 +136,7 @@ const UserAllOrders = ({
         );
 
     const reviewHandler = async () => {
+        setButtonLoading(true);
         if (rating === 0 || review === "") {
             toast.error("Please fill the all fields!");
         } else {
@@ -130,7 +149,13 @@ const UserAllOrders = ({
             setOpen(!open);
             setRating(0);
             setReview("");
+            toast.success("Review submitted successfully!");
+            setTimeout(() => {
+                window.location.reload();
+            }, 1000);
         }
+        setButtonLoading(false);
+        window.location.reload();
     };
 
     if (!isMounted) {
@@ -263,17 +288,14 @@ const UserAllOrders = ({
                                         color="primary"
                                         className={`${styles.button} !bg-[#000] mt-5`}
                                         onClick={reviewHandler}
-                                        disabled={orders
-                                            ?.find(
-                                                (i: any) =>
-                                                    i.promptId === promptId
-                                            )
-                                            ?.prompt.reviews.some(
-                                                (review: any) =>
-                                                    review.userId === user?.id
-                                            )}
                                     >
-                                        Submit
+                                        <span>
+                                            {buttonLoading ? (
+                                                <Spinner color="success" />
+                                            ) : (
+                                                "Submit"
+                                            )}
+                                        </span>
                                     </Button>
                                 </div>
                             </div>
