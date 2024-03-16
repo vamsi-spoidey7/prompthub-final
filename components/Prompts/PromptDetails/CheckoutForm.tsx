@@ -12,6 +12,7 @@ import React, { useState } from "react";
 import { Spinner } from "@nextui-org/react";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
+// import { sendMail } from "@/lib/sendMail";
 import { sendMail } from "@/lib/mailService";
 
 const CheckoutForm = ({
@@ -90,6 +91,7 @@ const CheckoutForm = ({
         setLoading(true);
         const userData = await getUser();
         if (!stripe || !elements) {
+            setLoading(false); // Move setLoading(false) here
             return;
         }
         const { error, paymentIntent } = await stripe.confirmPayment({
@@ -100,7 +102,6 @@ const CheckoutForm = ({
             const errorMessage =
                 error.message || "An error occurred during payment.";
             toast.error(errorMessage);
-            setLoading(false);
         } else if (paymentIntent && paymentIntent.status === "succeeded") {
             await newOrder({
                 userId: userData?.user?.id!,
@@ -111,6 +112,20 @@ const CheckoutForm = ({
             }).then((res) => {
                 toast.success("Order Placed Successfully!");
                 setOpen(!open);
+                setTimeout(() => {
+                    router.push("/my-orders");
+                }, 1000);
+                // sendMail(
+                //     userData?.user?.emailAddresses[0]?.emailAddress,
+                //     "Your Order is Confirmed - PromptHub",
+                //     receiverhtmlContent(
+                //         userData?.user.firstName +
+                //             " " +
+                //             userData?.user.lastName,
+                //         promptData.name,
+                //         promptData.shop.name
+                //     )
+                // );
                 sendMail(
                     "vamsimadugula7@gmail.com",
                     userData?.user?.emailAddresses[0]?.emailAddress,
@@ -123,10 +138,9 @@ const CheckoutForm = ({
                         promptData.shop.name
                     )
                 );
-                router.push("/my-orders");
             });
-            setLoading(false);
         }
+        setLoading(false);
     };
 
     return (
