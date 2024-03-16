@@ -75,7 +75,7 @@ const CheckoutForm = ({
             <p class="content">We're happy to confirm that your order <b>${promptName}</b> from <b>${shop}</b> has been successfully placed. Your prompts are ready to be used.</p>
             <p class="content">To access your purchased prompts, you can visit your account on the MyOrders Page or click the link below:</p>
             <a href="${
-                process.env.BASE_URL + "/my-orders"
+                process.env.NEXT_PUBLIC_BASE_URL + "/my-orders"
             }" class="content">My Orders Page</a>
             <p class="content">If you have any questions or need assistance, please don't hesitate to contact our support team at <a href="mailto:support@prompthub.com" class="content">support@prompthub.com</a></p>
             <p class="content">Thanks again for choosing PromptHub We hope you enjoy using your prompts.</p>
