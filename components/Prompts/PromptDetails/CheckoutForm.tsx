@@ -156,7 +156,7 @@ const CheckoutForm = ({
                     {loading ? (
                         <Spinner label="Processing..." color="warning" />
                     ) : (
-                        `Pay Now $${promptData?.price}`
+                        `Pay Now ₹${promptData?.price}`
                     )}
                 </span>
             </button>

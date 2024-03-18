@@ -47,7 +47,7 @@ const ShopRoot = ({
                                 <div className="w-full flex flex-col items-center">
                                     <AiOutlineMoneyCollect className="text-[#45CBA0] text-[30px]" />
                                     <h5 className="pt-2 font-Poppins text-[#fff]  text-[20px]">
-                                        US$ {totalSales}
+                                        INR {"₹" + totalSales}
                                     </h5>
                                     <h5 className="py-2 font-Poppins text-[#45CBA0] text-[17px] font-[400]">
                                         Total Sales

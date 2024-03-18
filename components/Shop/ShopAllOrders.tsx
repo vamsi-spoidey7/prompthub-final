@@ -51,7 +51,7 @@ const ShopAllOrders = ({
                 name: order?.user?.firstName + " " + order?.user?.lastName,
                 email: order?.user?.emailAddresses[0]?.emailAddress,
                 title: order?.prompt?.name,
-                price: "US $" + order?.prompt.price,
+                price: "INR ₹" + order?.prompt.price,
                 created_at: format(order?.createdAt),
             });
         });

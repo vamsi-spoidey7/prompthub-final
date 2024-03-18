@@ -59,7 +59,7 @@ const PromptCard = ({ prompt }: Props) => {
                 <h3 className={`${styles.label} text-[18px] text-white`}>
                     {prompt?.name}
                 </h3>
-                <p className={`${styles.paragraph}`}>${prompt?.price}</p>
+                <p className={`${styles.paragraph}`}>₹{prompt?.price}</p>
             </div>
             <Divider className="bg-[#ffffff18] my-3" />
             <div className="w-full flex items-center justify-between">

@@ -259,7 +259,7 @@ const UploadPrompt = (props: Props) => {
                                 estimatedPrice: e.target.value,
                             }))
                         }
-                        placeholder="US$40"
+                        placeholder="INR ₹800"
                         required
                         className="mb-6 md:mb-0"
                     />
@@ -274,7 +274,7 @@ const UploadPrompt = (props: Props) => {
                             }))
                         }
                         variant="bordered"
-                        placeholder="US$29.99"
+                        placeholder="INR₹ 699"
                         className="md:ml-10"
                         required
                     />

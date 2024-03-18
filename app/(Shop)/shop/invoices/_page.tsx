@@ -22,7 +22,7 @@ const AllInvoices = ({ invoices }: { invoices: any }) => {
         invoices.forEach((invoice: any) => {
             rows.push({
                 id: invoice?.id,
-                amount: "US$" + invoice?.amount,
+                amount: "INR ₹" + invoice?.amount,
                 created_at: format(invoice?.createdAt),
                 updated_at: format(invoice?.updatedAt),
                 status: invoice?.status,

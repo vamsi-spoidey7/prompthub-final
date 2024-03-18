@@ -96,8 +96,8 @@ const WithDrawEarning = ({
     const totalEarning = totalOrderAmount - totalInvoiceAmount;
 
     const handleWithdraw = async () => {
-        if (totalEarning < 100) {
-            toast.error("Withdraw minimum amount is 100$");
+        if (totalEarning < 1000) {
+            toast.error("Withdraw minimum amount is 1000₹");
         } else {
             await addWithdraw({
                 sellerId: shop?.id!,
@@ -117,7 +117,7 @@ const WithDrawEarning = ({
                     <div className="w-full text-center">
                         <p className={`${styles.label} !text-2xl text-center`}>
                             Withdraw Earning
-                            <span> (minimum withdraw 100$)</span>
+                            <span> (minimum withdraw 1000₹)</span>
                         </p>
                         <br />
                         <Button
@@ -165,7 +165,7 @@ const WithDrawEarning = ({
                                     color="primary"
                                     onClick={handleWithdraw}
                                 >
-                                    Withdraw Now US${totalEarning}
+                                    Withdraw Now INR{"₹" + totalEarning}
                                 </Button>
                             </>
                         ) : (

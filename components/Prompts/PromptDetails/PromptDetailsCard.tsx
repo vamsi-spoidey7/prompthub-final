@@ -83,12 +83,12 @@ const PromptDetailsCard = ({
                             <span
                                 className={`${styles.label} inline-block pt-4 !text-xl line-through`}
                             >
-                                ${promptData?.estimatedPrice}
+                                ₹{promptData?.estimatedPrice}
                             </span>
                             <span
                                 className={`${styles.label} inline-block pt-4 !text-xl text-white pl-3`}
                             >
-                                ${promptData?.price}
+                                ₹{promptData?.price}
                             </span>
                         </div>
                         <Ratings rating={promptData?.rating} />
@@ -125,7 +125,7 @@ const PromptDetailsCard = ({
                             radius="full"
                             className={`${styles.button} h-[45px] font-[400] bg-[#64ff4b] !text-indigo-900 md:ml-2`}
                         >
-                            Buy now ${promptData?.price}
+                            Buy now ₹{promptData?.price}
                         </Button>
                     </div>
                 </div>
