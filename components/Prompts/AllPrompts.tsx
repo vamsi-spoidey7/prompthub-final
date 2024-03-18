@@ -38,7 +38,7 @@ const AllPrompts = ({
         rows.push({
             id: item.id,
             name: item.name,
-            price: "₹INR" + item.price,
+            price: "INR ₹" + item.price,
             rating: item.rating,
             purchased: item.orders?.length,
             status: item.status,
