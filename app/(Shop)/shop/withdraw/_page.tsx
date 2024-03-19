@@ -10,6 +10,7 @@ import { deleteWithDrawMethod } from "@/actions/withdraws/deleteWithdrawMethod";
 import toast from "react-hot-toast";
 import Loader from "@/utils/Loader";
 import { addWithdraw } from "@/actions/withdraws/addWithdraw";
+import WithdrawTermsModal from "@/utils/WithdrawTermsModal";
 
 interface ChangeEvent<T = HTMLInputElement> {
     target: EventTarget & T;
@@ -34,6 +35,8 @@ const WithDrawEarning = ({
         swiftCode: "",
         bankAddress: "",
     });
+
+    const [agreementOpen, setAgreementOpen] = useState(false);
 
     const handleInputChange = (e: ChangeEvent) => {
         const { name, value } = e.target;
@@ -163,7 +166,7 @@ const WithDrawEarning = ({
                                 <Button
                                     className={`${styles.button} cursor-pointer`}
                                     color="primary"
-                                    onClick={handleWithdraw}
+                                    onClick={() => setAgreementOpen(true)}
                                 >
                                     Withdraw Now INR{"₹" + totalEarning}
                                 </Button>
@@ -281,6 +284,13 @@ const WithDrawEarning = ({
                         )}
                     </div>
                 </div>
+            )}
+            {agreementOpen && (
+                <WithdrawTermsModal
+                    isOpen={agreementOpen}
+                    onClose={() => setAgreementOpen(false)}
+                    onWithdraw={handleWithdraw}
+                />
             )}
         </>
     );
