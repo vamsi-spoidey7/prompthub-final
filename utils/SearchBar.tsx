@@ -1,5 +1,5 @@
 import { AiOutlineSearch } from "react-icons/ai";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { ReactSearchAutocomplete } from "react-search-autocomplete";
 import { debounce } from "lodash";
 import { useRouter } from "next/navigation";
@@ -7,12 +7,35 @@ import { useRouter } from "next/navigation";
 type Props = {};
 const SearchBar = (props: Props) => {
     const [suggestions, setSuggestions] = useState([]);
+    const [isExpanded, setIsExpanded] = useState(false);
+    const searchBarRef = useRef<HTMLDivElement | null>(null);
     const router = useRouter();
 
     useEffect(() => {
         // Fetch suggestions when component mounts
         fetchSuggestions("");
     }, []);
+
+    useEffect(() => {
+        // Add event listener when component mounts
+        document.addEventListener("click", handleClickOutside);
+
+        // Remove event listener when component unmounts
+        return () => {
+            document.removeEventListener("click", handleClickOutside);
+        };
+    }, []);
+
+    const handleClickOutside = (event: MouseEvent) => {
+        // Close the search bar if clicked outside of it
+        if (
+            searchBarRef.current &&
+            event.target instanceof Node &&
+            !searchBarRef.current.contains(event.target)
+        ) {
+            setIsExpanded(false);
+        }
+    };
 
     const fetchSuggestions = async (searchTerm: any) => {
         try {
@@ -66,19 +89,38 @@ const SearchBar = (props: Props) => {
         setSuggestions([]);
     };
 
+    const toggleSearchBar = () => {
+        setIsExpanded(!isExpanded);
+    };
+
+    const handleSearchBarClick = (event: React.MouseEvent<HTMLDivElement>) => {
+        event.stopPropagation();
+    };
+
     return (
         // <AiOutlineSearch className="text-[25px] md:mr-3 lg:mr-5 cursor-pointer" />
-        <div className="w-[300px] text-[25px] md:mr-3 lg:mr-5 cursor-pointer">
-            <ReactSearchAutocomplete
-                items={suggestions}
-                onSearch={handleOnSearch}
-                onSelect={handleOnSelect}
-                onClear={handleOnClear}
-                formatResult={formatResult}
-                styling={styling}
-                inputDebounce={100}
-                placeholder="Type to search"
-            />
+        <div
+            ref={searchBarRef}
+            className={`relative ${
+                isExpanded ? "w-[300px]" : "w-[50px]"
+            } text-[25px] md:mr-3 lg:mr-5 cursor-pointer`}
+            onClick={toggleSearchBar}
+        >
+            <AiOutlineSearch className="text-[29px] absolute top-1/2 transform -translate-y-1/2 left-2 text-xl cursor-pointer" />
+            {isExpanded && (
+                <div onClick={handleSearchBarClick}>
+                    <ReactSearchAutocomplete
+                        items={suggestions}
+                        onSearch={handleOnSearch}
+                        onSelect={handleOnSelect}
+                        onClear={handleOnClear}
+                        formatResult={formatResult}
+                        styling={styling}
+                        inputDebounce={100}
+                        placeholder="Type to search"
+                    />
+                </div>
+            )}
         </div>
     );
 };

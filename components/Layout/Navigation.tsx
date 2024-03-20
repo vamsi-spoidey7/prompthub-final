@@ -9,18 +9,18 @@ const navItems = [
         title: "Home",
         href: "/",
     },
-    {
-        title: "About",
-        href: "/about",
-    },
+    // {
+    //     title: "About",
+    //     href: "/about",
+    // },
     {
         title: "MarketPlace",
         href: "/marketplace",
     },
-    {
-        title: "Contact",
-        href: "/contact",
-    },
+    // {
+    //     title: "Contact",
+    //     href: "/contact",
+    // },
     {
         title: "Policy",
         href: "/policy",
