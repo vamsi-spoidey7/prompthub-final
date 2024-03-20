@@ -82,9 +82,10 @@ const PolicyPage = ({
                     </Tab>
                 </Tabs>
             </div>
-
-            <Divider className="bg-[#ffffff14] mt-5" />
-            <Footer />
+            <div className="w-[95%] md:w-[90%] xl:w-[80%] 2xl:w-[75%] m-auto">
+                <Divider className="bg-[#ffffff23]" />
+                <Footer />
+            </div>
         </>
     );
 };

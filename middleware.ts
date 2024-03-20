@@ -4,6 +4,7 @@ export default authMiddleware({
     // Routes that can be accessed while signed out
     publicRoutes: [
         "/",
+        "/policy",
         "/api/get-prompts",
         "/api/get-top-sellers",
         "/api/get-prompt-suggestions",
