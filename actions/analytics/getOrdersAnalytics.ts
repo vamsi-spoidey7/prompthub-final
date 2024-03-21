@@ -2,35 +2,32 @@
 
 import prisma from "@/lib/prismaDb";
 
-interface MonthData {
-    month: string;
+interface DayData {
+    day: string;
     count: number;
 }
 
-export async function generateLast12MonthsOrderData(): Promise<{
-    last12Months: MonthData[];
+export async function generateLast30DaysOrderData(date: Date): Promise<{
+    last30Days: DayData[];
 }> {
-    const last12Months: MonthData[] = [];
-    const currentDate = new Date();
-    currentDate.setDate(currentDate.getDate() + 1);
+    const last30Days: DayData[] = [];
+    const currentDate = date;
 
-    for (let i = 11; i >= 0; i--) {
-        const endDate = new Date(
-            currentDate.getFullYear(),
-            currentDate.getMonth(),
-            currentDate.getDate() - i * 28
-        );
-        const startDate = new Date(
-            endDate.getFullYear(),
-            endDate.getMonth(),
-            endDate.getDate() - 28
-        );
+    for (let i = 29; i >= 0; i--) {
+        const date = new Date(currentDate);
+        date.setDate(currentDate.getDate() - i);
 
-        const monthYear = endDate.toLocaleString("default", {
+        const dayFormatted = date.toLocaleDateString("default", {
             day: "numeric",
             month: "short",
             year: "numeric",
         });
+
+        const startDate = new Date(date);
+        startDate.setHours(0, 0, 0, 0);
+
+        const endDate = new Date(date);
+        endDate.setHours(23, 59, 59, 999);
 
         const allOrders = await prisma.orders.findMany();
 
@@ -41,7 +38,8 @@ export async function generateLast12MonthsOrderData(): Promise<{
 
         const count = orders.length;
 
-        last12Months.push({ month: monthYear, count });
+        last30Days.push({ day: dayFormatted, count });
     }
-    return { last12Months };
+    console.log(last30Days);
+    return { last30Days };
 }

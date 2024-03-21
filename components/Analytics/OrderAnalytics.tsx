@@ -1,5 +1,5 @@
 "use client";
-import { generateLast12MonthsOrderData } from "@/actions/analytics/getOrdersAnalytics";
+import { generateLast30DaysOrderData } from "@/actions/analytics/getOrdersAnalytics";
 import { styles } from "@/utils/styles";
 import { useEffect, useState } from "react";
 import {
@@ -15,21 +15,45 @@ type Props = {
     isDashboard?: boolean;
 };
 
+const CustomTooltip = ({ active, payload, label }: any) => {
+    if (active && payload && payload.length) {
+        const formattedDate = new Date(label).toLocaleDateString("default", {
+            day: "numeric",
+            month: "short",
+            year: "numeric",
+        });
+        return (
+            <div className="custom-tooltip backdrop-brightness-0 p-2">
+                <p className="label">{`Date: ${formattedDate}`}</p>
+                <p className="label">{`Count: ${payload[0].value}`}</p>
+            </div>
+        );
+    }
+
+    return null;
+};
+
 const OrderAnalytics = ({ isDashboard }: Props) => {
     const [data, setData] = useState<any>();
 
     useEffect(() => {
-        generateLast12MonthsOrderData()
+        generateLast30DaysOrderData(new Date())
             .then((res) => {
-                setData(res.last12Months);
+                const formattedData = res.last30Days.map((item: any) => ({
+                    day: new Date(item.day), // Convert date string to Date object
+                    count: item.count,
+                }));
+                // Sort the data by date
+                formattedData.sort((a, b) => a.day.getTime() - b.day.getTime());
+                setData(formattedData);
             })
             .catch((error) => {
                 console.log(error);
             });
     }, []);
 
-    data?.last12Months?.forEach((item: any) => {
-        data?.last12Months?.push({ month: item.month, count: item.count });
+    data?.last30Days?.forEach((item: any) => {
+        data?.last30Days?.push({ day: item.day, count: item.count });
     });
 
     return (
@@ -43,11 +67,12 @@ const OrderAnalytics = ({ isDashboard }: Props) => {
             >
                 <div className={`${isDashboard ? "!ml-8 mb-5" : ""}`}>
                     <h1
-                        className={`${styles.label} ${
+                        className={`${styles.title} ${
                             isDashboard && "!text-[20px]"
                         } px-5 !text-start`}
                     >
-                        Orders Analytics
+                        <span className="font-bold">Orders Analytics</span>{" "}
+                        <span className="text-[14px]">this month</span>
                     </h1>
                     {!isDashboard && (
                         <p className={`${styles.label} px-5`}>
@@ -76,9 +101,20 @@ const OrderAnalytics = ({ isDashboard }: Props) => {
                                         bottom: 0,
                                     }}
                                 >
-                                    <XAxis dataKey="month" />
+                                    <XAxis
+                                        dataKey="day"
+                                        tickFormatter={(tick) =>
+                                            new Date(tick).toLocaleDateString(
+                                                "default",
+                                                {
+                                                    day: "numeric",
+                                                    month: "short",
+                                                }
+                                            )
+                                        }
+                                    />
                                     <YAxis />
-                                    <Tooltip />
+                                    <Tooltip content={<CustomTooltip />} />
                                     <Area
                                         type="monotone"
                                         dataKey="count"

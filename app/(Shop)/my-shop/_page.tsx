@@ -61,7 +61,7 @@ const ShopRoot = ({
                 <div className="grid grid-cols-[65%,34%] mt-[-20px]">
                     <div className="bg-[#111c43] w-[94%] mt-[30px] h-[43vh] shadow-sm m-auto">
                         <h1
-                            className={`${styles.label} !text-[20px]
+                            className={`${styles.title} !text-[20px]
              px-5 py-2 !text-start`}
                         >
                             All Prompts

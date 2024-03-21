@@ -3,4 +3,5 @@ export const styles = {
     heading: "text-4xl font-[700] font-Inter text-white",
     paragraph: "text-[18px] font-[400] text-[#b1b0b6] font-Inter",
     label: "text-[16px] text-[#b1b0b6] font-Inter font-[500]",
+    title: "text-[25px] text-black dark:text-white font-[500] font-Inter text-center py-2",
 };
