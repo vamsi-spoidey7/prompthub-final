@@ -16,7 +16,11 @@ export async function GET(req: NextRequest, { params }: { params: any }) {
             include: {
                 orders: true,
                 images: true,
-                reviews: true,
+                reviews: {
+                    orderBy: {
+                        createdAt: "desc", // Sort reviews by createdAt in descending order
+                    },
+                },
                 promptUrl: true,
             },
             where: {

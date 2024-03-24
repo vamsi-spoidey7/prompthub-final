@@ -13,6 +13,7 @@ import {
 
 type Props = {
     isDashboard?: boolean;
+    sellerId: string;
 };
 
 const CustomTooltip = ({ active, payload, label }: any) => {
@@ -33,11 +34,11 @@ const CustomTooltip = ({ active, payload, label }: any) => {
     return null;
 };
 
-const OrderAnalytics = ({ isDashboard }: Props) => {
+const OrderAnalytics = ({ isDashboard, sellerId }: Props) => {
     const [data, setData] = useState<any>();
 
     useEffect(() => {
-        generateLast30DaysOrderData(new Date())
+        generateLast30DaysOrderData(new Date(), sellerId)
             .then((res) => {
                 const formattedData = res.last30Days.map((item: any) => ({
                     day: new Date(item.day), // Convert date string to Date object

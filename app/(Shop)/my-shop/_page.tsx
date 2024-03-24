@@ -10,9 +10,11 @@ import { BiBorderLeft } from "react-icons/bi";
 const ShopRoot = ({
     ordersData,
     promptsData,
+    sellerId,
 }: {
     ordersData: any;
     promptsData: any;
+    sellerId: string;
 }) => {
     const totalSales = ordersData?.reduce(
         (total: number, item: any) => (item?.prompt?.price || 0) + total,
@@ -24,7 +26,10 @@ const ShopRoot = ({
             <div className="mt-[5px] min-h-screen">
                 <div className="grid grid-cols-[75%,25%]">
                     <div className="p-8">
-                        <OrderAnalytics isDashboard={true} />
+                        <OrderAnalytics
+                            isDashboard={true}
+                            sellerId={sellerId}
+                        />
                     </div>
 
                     <div className="pt-[80px] pr-8">

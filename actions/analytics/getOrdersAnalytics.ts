@@ -7,7 +7,10 @@ interface DayData {
     count: number;
 }
 
-export async function generateLast30DaysOrderData(date: Date): Promise<{
+export async function generateLast30DaysOrderData(
+    date: Date,
+    sellerId: string
+): Promise<{
     last30Days: DayData[];
 }> {
     const last30Days: DayData[] = [];
@@ -29,7 +32,16 @@ export async function generateLast30DaysOrderData(date: Date): Promise<{
         const endDate = new Date(date);
         endDate.setHours(23, 59, 59, 999);
 
-        const allOrders = await prisma.orders.findMany();
+        const allOrders = await prisma.orders.findMany({
+            where: {
+                prompt: {
+                    sellerId: sellerId, // Use sellerId directly
+                },
+            },
+            include: {
+                prompt: true,
+            },
+        });
 
         const orders = allOrders.filter((order) => {
             const createdAt = new Date(order.createdAt);
@@ -40,6 +52,6 @@ export async function generateLast30DaysOrderData(date: Date): Promise<{
 
         last30Days.push({ day: dayFormatted, count });
     }
-    console.log(last30Days);
+    // console.log(last30Days);
     return { last30Days };
 }

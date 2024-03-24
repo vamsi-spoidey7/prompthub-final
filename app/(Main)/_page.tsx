@@ -100,8 +100,7 @@ const RoutePage = ({ user, isSellerExist }: Props) => {
                         </div>
                         <br />
                         <BestSellers />
-                        <Future />
-                        <Partners />
+
                         <SellersBanner />
                         <br />
                         <br />

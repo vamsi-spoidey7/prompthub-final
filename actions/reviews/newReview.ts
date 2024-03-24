@@ -49,7 +49,7 @@ export const newReview = async ({
                     id: promptId,
                 },
                 data: {
-                    rating: avg / reviews.length,
+                    rating: parseFloat((avg / reviews.length).toFixed(2)),
                 },
             });
         }
@@ -79,7 +79,9 @@ export const newReview = async ({
                     userId: prompt?.sellerId,
                 },
                 data: {
-                    ratings: totalRating / promptWithRatingCount,
+                    ratings: parseFloat(
+                        (totalRating / promptWithRatingCount).toFixed(2)
+                    ),
                 },
             });
         }
