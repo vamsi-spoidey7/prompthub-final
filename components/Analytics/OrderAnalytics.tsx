@@ -51,7 +51,7 @@ const OrderAnalytics = ({ isDashboard, sellerId }: Props) => {
             .catch((error) => {
                 console.log(error);
             });
-    }, []);
+    }, [sellerId]);
 
     data?.last30Days?.forEach((item: any) => {
         data?.last30Days?.push({ day: item.day, count: item.count });
