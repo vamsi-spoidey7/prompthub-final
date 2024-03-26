@@ -51,11 +51,21 @@ const OrderAnalytics = ({ isDashboard, sellerId }: Props) => {
             .catch((error) => {
                 console.log(error);
             });
-    }, [sellerId]);
+    }, []);
 
-    data?.last30Days?.forEach((item: any) => {
-        data?.last30Days?.push({ day: item.day, count: item.count });
-    });
+    // data?.last30Days?.forEach((item: any) => {
+    //     data?.last30Days?.push({ day: item.day, count: item.count });
+    // });
+
+    useEffect(() => {
+        if (data) {
+            const newData = [...data]; // Create a copy of the data array
+            newData.forEach((item: any) => {
+                newData.push({ day: item.day, count: item.count });
+            });
+            setData(newData);
+        }
+    }, [data]);
 
     return (
         <>
